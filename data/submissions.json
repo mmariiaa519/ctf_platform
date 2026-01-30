@@ -1,0 +1,58 @@
+[
+  {
+    "id": "7d454050-aff6-4e59-908e-d9982c349287",
+    "team_id": "6e957959-ab83-4ad5-a1a1-47964f0405a3",
+    "challenge_id": "0d949cdf-4c28-4045-a3bf-4056ac88f6cc",
+    "points_awarded": 100,
+    "hints_used": 0,
+    "submitted_at": "2026-01-30T11:44:32.777Z"
+  },
+  {
+    "id": "6f0df67b-9853-4599-a7b4-477584da1226",
+    "team_id": "6e957959-ab83-4ad5-a1a1-47964f0405a3",
+    "challenge_id": "0c8b2f05-2183-4a9b-8e26-eba976a1b3b1",
+    "points_awarded": 100,
+    "hints_used": 0,
+    "submitted_at": "2026-01-30T11:44:45.078Z"
+  },
+  {
+    "id": "a0412066-aad3-411d-b0ad-627ac349854f",
+    "team_id": "6e957959-ab83-4ad5-a1a1-47964f0405a3",
+    "challenge_id": "32182eb2-a908-47a5-819b-a19bb80d251c",
+    "points_awarded": 300,
+    "hints_used": 0,
+    "submitted_at": "2026-01-30T11:45:13.727Z"
+  },
+  {
+    "id": "09790af5-6c0c-4087-9d47-cb919646549f",
+    "team_id": "6e957959-ab83-4ad5-a1a1-47964f0405a3",
+    "challenge_id": "2dbf26d6-ba27-4304-a16c-233bc5929ad7",
+    "points_awarded": 300,
+    "hints_used": 0,
+    "submitted_at": "2026-01-30T11:46:10.897Z"
+  },
+  {
+    "id": "fb3480cc-83bf-4b65-a2ca-44f289f29a94",
+    "team_id": "6e957959-ab83-4ad5-a1a1-47964f0405a3",
+    "challenge_id": "3bc8ca7f-0d26-461c-ae72-03ae38f0bd32",
+    "points_awarded": 300,
+    "hints_used": 0,
+    "submitted_at": "2026-01-30T11:46:17.254Z"
+  },
+  {
+    "id": "4400db4e-ecde-452a-a407-1d8b49f78367",
+    "team_id": "6e957959-ab83-4ad5-a1a1-47964f0405a3",
+    "challenge_id": "c91b01f3-47b4-4c00-827b-b98e64686897",
+    "points_awarded": 500,
+    "hints_used": 0,
+    "submitted_at": "2026-01-30T11:46:54.047Z"
+  },
+  {
+    "id": "f9c203bd-3711-4c0a-bb01-7d777143052e",
+    "team_id": "6e957959-ab83-4ad5-a1a1-47964f0405a3",
+    "challenge_id": "e79ee6d3-d176-43b7-88bc-3e17904fccd4",
+    "points_awarded": 1000,
+    "hints_used": 0,
+    "submitted_at": "2026-01-30T11:54:32.501Z"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "0d949cdf-4c28-4045-a3bf-4056ac88f6cc",
+    "title": "Superficie expuesta",
+    "description": "Un primer contacto con la infraestructura revela que no todo está tan oculto como debería. Observar con atención puede marcar la diferencia",
+    "category": "Web",
+    "points": 100,
+    "flagHash": "471a88ba0867d3f10ee31518e78586fa2fc9acd2378c2e498884285ed91982e7",
+    "order_num": 0,
+    "created_at": "2026-01-30T09:46:13.468Z"
+  },
+  {
+    "id": "0c8b2f05-2183-4a9b-8e26-eba976a1b3b1",
+    "title": "La primera grieta",
+    "description": "Algunos accesos parecen más resistentes de lo que realmente son. Encontrar el punto débil correcto permite dar el primer paso dentro del sistema.",
+    "category": "Web",
+    "points": 100,
+    "flagHash": "0be4ff2da16b9513f95d50cbb425d4f83eceed81fc3b0e757eecd8954ffba9bd",
+    "order_num": 1,
+    "created_at": "2026-01-30T09:46:13.468Z"
+  },
+  {
+    "id": "32182eb2-a908-47a5-819b-a19bb80d251c",
+    "title": "Lo que no se ve",
+    "description": "No toda la información importante es evidente a simple vista.",
+    "category": "Forensics",
+    "points": 300,
+    "flagHash": "15beeaacf98aa6dd632c7eae92b32f918d3bf969f043d951f53b4cbcc34eecc8",
+    "order_num": 2,
+    "created_at": "2026-01-30T09:46:13.468Z"
+  },
+  {
+    "id": "2dbf26d6-ba27-4304-a16c-233bc5929ad7",
+    "title": "Mensajes internos",
+    "description": "Las comunicaciones internas pueden revelar más de lo que deberían. Acceder a ellas puede destapar información sensible y estratégica",
+    "category": "Web",
+    "points": 300,
+    "flagHash": "d1ff4464e61463e9a7eb40f8c59f50a44b90f01cd06609e884558e0369945d2a",
+    "order_num": 3,
+    "created_at": "2026-01-30T09:46:13.468Z"
+  },
+  {
+    "id": "3bc8ca7f-0d26-461c-ae72-03ae38f0bd32",
+    "title": "Un nivel más arriba",
+    "description": "Tener acceso no siempre es suficiente. Una mala configuración puede permitir ir más allá de los límites inicialmente expuestos.",
+    "category": "Pwn",
+    "points": 300,
+    "flagHash": "cb04409080df40145235efff46a2a3013705b5e7b9cc70364e1de2ebafe7a970",
+    "order_num": 4,
+    "created_at": "2026-01-30T09:46:13.468Z"
+  },
+  {
+    "id": "c91b01f3-47b4-4c00-827b-b98e64686897",
+    "title": "Dejar huella",
+    "description": "El verdadero reto no es solo entrar, sino permanecer. Dejar un acceso estable asegura el control incluso tras cambios en el sistema.",
+    "category": "Pwn",
+    "points": 500,
+    "flagHash": "cb675af6873ed60c043b32d143897360706aed52651e6eebdd6ea384f9263c21",
+    "order_num": 5,
+    "created_at": "2026-01-30T09:46:13.468Z"
+  },
+  {
+    "id": "e79ee6d3-d176-43b7-88bc-3e17904fccd4",
+    "title": "El secreto mejor guardado",
+    "description": "El objetivo final está especialmente protegido y contiene información crítica. Superar sus defensas es la prueba definitiva del reto.",
+    "category": "Crypto",
+    "points": 1000,
+    "flagHash": "aff88af8e97a167d9d24cc06d3248941e5560ec478818fec08e0b4378d260cf6",
+    "order_num": 6,
+    "created_at": "2026-01-30T09:46:13.468Z"
+  }
+]

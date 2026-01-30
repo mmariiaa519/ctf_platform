@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CTF Platform</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg-card: #12121a;
+      --bg-hover: #1a1a25;
+      --border: #2a2a3a;
+      --text: #e0e0e0;
+      --text-dim: #888;
+      --accent: #00EDEF;
+      --accent-dim: #00b8ba;
+      --danger: #ff4444;
+      --warning: #ffaa00;
+      --purple: #aa66ff;
+      --blue: #0321F1;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo span {
+      color: var(--text);
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    nav a, nav button {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    nav a:hover, nav button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    nav a.active {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    .team-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .team-name {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Main Layout */
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Auth Forms */
+    .auth-container {
+      max-width: 400px;
+      margin: 4rem auto;
+    }
+
+    .auth-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+
+    .auth-box h2 {
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: var(--accent);
+    }
+
+    .auth-tabs {
+      display: flex;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .auth-tab {
+      flex: 1;
+      padding: 0.75rem;
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .auth-tab.active {
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      width: 100%;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dim);
+    }
+
+    .btn-secondary {
+      background: var(--bg-hover);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
+
+    .btn-small {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    .error-msg {
+      color: var(--danger);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    .success-msg {
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    /* Challenges Grid */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .page-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .category-filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .category-btn {
+      padding: 0.4rem 0.8rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .category-btn:hover, .category-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .challenges-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .challenge-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .challenge-card:hover {
+      border-color: var(--accent-dim);
+      transform: translateY(-2px);
+    }
+
+    .challenge-card.solved {
+      border-color: var(--accent);
+    }
+
+    .challenge-card.solved::before {
+      content: '✓ RESUELTO';
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.25rem 0.75rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      border-bottom-left-radius: 8px;
+    }
+
+    .challenge-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .challenge-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .challenge-points {
+      background: var(--bg);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .challenge-points.reduced {
+      color: var(--warning);
+    }
+
+    .challenge-category {
+      display: inline-block;
+      background: var(--purple);
+      color: white;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .challenge-category.web { background: var(--blue); }
+    .challenge-category.crypto { background: var(--purple); }
+    .challenge-category.forensics { background: #2ecc71; }
+    .challenge-category.reversing { background: #ff9933; }
+    .challenge-category.pwn { background: #ff4466; }
+
+    .challenge-description {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .challenge-hints {
+      margin-bottom: 1rem;
+    }
+
+    .hint-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .hint-btn:hover:not(.unlocked):not(:disabled) {
+      border-color: var(--warning);
+      color: var(--warning);
+    }
+
+    .hint-btn.unlocked {
+      background: var(--warning);
+      color: var(--bg);
+      border-color: var(--warning);
+    }
+
+    .hint-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .hint-text {
+      background: var(--bg);
+      border-left: 3px solid var(--warning);
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .challenge-footer {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .challenge-footer input {
+      flex: 1;
+      padding: 0.6rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+
+    .challenge-footer input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .submit-btn {
+      padding: 0.6rem 1rem;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: var(--accent-dim);
+    }
+
+    .submit-btn:disabled {
+      background: var(--border);
+      cursor: not-allowed;
+    }
+
+    /* Scoreboard */
+    .scoreboard-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .scoreboard-header {
+      background: var(--bg-hover);
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .scoreboard-header h2 {
+      font-size: 1.2rem;
+    }
+
+    .refresh-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .refresh-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 1rem 1.5rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: var(--bg-hover);
+      color: var(--text-dim);
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    tr:hover {
+      background: var(--bg-hover);
+    }
+
+    .rank-cell {
+      font-weight: 700;
+      width: 60px;
+    }
+
+    .rank-1 { color: #ffd700; }
+    .rank-2 { color: #c0c0c0; }
+    .rank-3 { color: #cd7f32; }
+
+    .team-cell {
+      font-weight: 600;
+    }
+
+    .points-cell {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .time-cell {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: scale(0.9);
+      transition: transform 0.3s;
+    }
+
+    .modal-overlay.active .modal {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-header h3 {
+      font-size: 1.2rem;
+    }
+
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      color: var(--danger);
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      margin-top: 0.25rem;
+    }
+
+    /* Team History */
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .history-item:last-child {
+      border-bottom: none;
+    }
+
+    .history-challenge {
+      font-weight: 600;
+    }
+
+    .history-points {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .history-time {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+
+    /* Admin Panel */
+    .admin-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .admin-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+
+    .admin-section-header {
+      background: var(--bg-hover);
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-section-content {
+      padding: 1.5rem;
+    }
+
+    .challenge-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .challenge-form-grid .full-width {
+      grid-column: 1 / -1;
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-dim);
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      main {
+        padding: 1rem;
+      }
+
+      .challenges-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .challenge-form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      th, td {
+        padding: 0.75rem;
+      }
+    }
+
+    /* Toast notifications */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .toast {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      min-width: 250px;
+      animation: slideIn 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .toast.success {
+      border-color: var(--accent);
+    }
+
+    .toast.error {
+      border-color: var(--danger);
+    }
+
+    .toast-icon {
+      font-size: 1.2rem;
+    }
+
+    .toast.success .toast-icon { color: var(--accent); }
+    .toast.error .toast-icon { color: var(--danger); }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="loading">
+      <div class="spinner"></div>
+      <p style="margin-top: 1rem;">Cargando CTF Platform...</p>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toasts"></div>
+
+  <script>
+    // State
+    const state = {
+      user: null,
+      challenges: [],
+      scoreboard: [],
+      currentPage: 'challenges',
+      selectedCategory: 'all',
+      isAdmin: false
+    };
+
+    // API helpers
+    const api = {
+      async get(url) {
+        const res = await fetch(url);
+        return res.json();
+      },
+      async post(url, data) {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        return res.json();
+      },
+      async put(url, data) {
+        const res = await fetch(url, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        return res.json();
+      },
+      async delete(url) {
+        const res = await fetch(url, { method: 'DELETE' });
+        return res.json();
+      }
+    };
+
+    // Toast notifications
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toasts');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `
+        <span class="toast-icon">${type === 'success' ? '✓' : '✗'}</span>
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+
+    // Format time
+    function formatTime(dateStr) {
+      if (!dateStr) return '-';
+      const date = new Date(dateStr);
+      return date.toLocaleString('es-ES', { 
+        day: '2-digit', 
+        month: '2-digit',
+        hour: '2-digit', 
+        minute: '2-digit' 
+      });
+    }
+
+    // Calculate potential points with hints
+    function calculatePoints(base, hints) {
+      const multipliers = [1, 0.75, 0.5, 0.3];
+      return Math.floor(base * multipliers[Math.min(hints, 3)]);
+    }
+
+    // Render functions
+    function render() {
+      const app = document.getElementById('app');
+      
+      if (!state.user) {
+        app.innerHTML = renderAuth();
+        return;
+      }
+
+      if (state.isAdmin && state.currentPage === 'admin') {
+        app.innerHTML = renderHeader() + renderAdmin();
+        return;
+      }
+
+      let content = '';
+      switch (state.currentPage) {
+        case 'challenges':
+          content = renderChallenges();
+          break;
+        case 'scoreboard':
+          content = renderScoreboard();
+          break;
+        default:
+          content = renderChallenges();
+      }
+
+      app.innerHTML = renderHeader() + `<main>${content}</main>`;
+      setupEventListeners();
+    }
+
+    function renderHeader() {
+      return `
+        <header>
+          <a href="#" class="logo" onclick="navigate('challenges')">
+            <span style="color: var(--accent);">[</span>CTF<span style="color: var(--accent);">]</span>
+            <span>Platform MAERSC 2026</span>
+          </a>
+          <nav>
+            <a href="#" class="${state.currentPage === 'challenges' ? 'active' : ''}" onclick="navigate('challenges')">Retos</a>
+            <a href="#" class="${state.currentPage === 'scoreboard' ? 'active' : ''}" onclick="navigate('scoreboard')">Scoreboard</a>
+            ${state.isAdmin ? `<a href="#" class="${state.currentPage === 'admin' ? 'active' : ''}" onclick="navigate('admin')">Admin</a>` : ''}
+            <div class="team-info">
+              <span class="team-name">${state.user}</span>
+              <button onclick="logout()">Salir</button>
+            </div>
+          </nav>
+        </header>
+      `;
+    }
+
+    function renderAuth() {
+      return `
+        <div class="auth-container">
+          <div class="auth-box">
+            <h2>[CTF] Platform MAERSC 2026</h2>
+            <div class="auth-tabs">
+              <button class="auth-tab active" onclick="switchAuthTab('login')">Iniciar Sesión</button>
+              <button class="auth-tab" onclick="switchAuthTab('register')">Registrarse</button>
+            </div>
+            <form id="auth-form" onsubmit="handleAuth(event)">
+              <div class="form-group">
+                <label>Nombre de Equipo</label>
+                <input type="text" name="name" required autocomplete="off">
+              </div>
+              <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" name="password" required>
+              </div>
+              <input type="hidden" name="action" value="login">
+              <button type="submit" class="btn btn-primary">Entrar</button>
+              <div id="auth-error" class="error-msg"></div>
+            </form>
+            <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); text-align: center;">
+              <a href="#" style="color: var(--text-dim); font-size: 0.85rem;" onclick="showAdminLogin()">Admin Login</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderChallenges() {
+      const categories = ['all', ...new Set(state.challenges.map(c => c.category))];
+      const filtered = state.selectedCategory === 'all' 
+        ? state.challenges 
+        : state.challenges.filter(c => c.category === state.selectedCategory);
+
+      const solvedCount = state.challenges.filter(c => c.solved).length;
+      const totalPoints = state.challenges.filter(c => c.solved).reduce((sum, c) => {
+        return sum + calculatePoints(c.points, c.hintsUsed || 0);
+      }, 0);
+
+      return `
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value">${solvedCount}/${state.challenges.length}</div>
+            <div class="stat-label">Retos Resueltos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">${totalPoints}</div>
+            <div class="stat-label">Puntos Totales</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">${state.challenges.reduce((sum, c) => sum + c.points, 0)}</div>
+            <div class="stat-label">Puntos Posibles</div>
+          </div>
+        </div>
+
+        <div class="page-header">
+          <h1>Retos</h1>
+          <div class="category-filters">
+            ${categories.map(cat => `
+              <button class="category-btn ${state.selectedCategory === cat ? 'active' : ''}" 
+                      onclick="filterCategory('${cat}')">
+                ${cat === 'all' ? 'Todos' : cat}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="challenges-grid">
+          ${filtered.map(c => renderChallengeCard(c)).join('')}
+        </div>
+      `;
+    }
+
+    function renderChallengeCard(challenge) {
+      return `
+        <div class="challenge-card ${challenge.solved ? 'solved' : ''}" data-id="${challenge.id}">
+          <div class="challenge-header">
+            <div class="challenge-title">${challenge.title}</div>
+            <div class="challenge-points">${challenge.points} pts</div>
+          </div>
+
+          <span class="challenge-category ${challenge.category.toLowerCase()}">${challenge.category}</span>
+          <p class="challenge-description">${challenge.description}</p>
+
+	  ${!challenge.solved ? `          
+            <div class="challenge-footer">
+              <input type="text" placeholder="FLAG" id="flag-${challenge.id}">
+              <button class="submit-btn" onclick="submitFlag('${challenge.id}')">Enviar</button>
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    function renderScoreboard() {
+      return `
+        <div class="page-header">
+          <h1>Scoreboard</h1>
+          <button class="refresh-btn" onclick="loadScoreboard()">↻ Actualizar</button>
+        </div>
+
+        <div class="scoreboard-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Equipo</th>
+                <th>Puntos</th>
+                <th>Retos</th>
+                <th>Última Flag</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${state.scoreboard.map(team => `
+                <tr onclick="showTeamHistory('${team.id}', '${team.name}')" style="cursor: pointer;">
+                  <td class="rank-cell rank-${team.rank}">#${team.rank}</td>
+                  <td class="team-cell">${team.name}</td>
+                  <td class="points-cell">${team.total_points}</td>
+                  <td>${team.challenges_solved}</td>
+                  <td class="time-cell">${formatTime(team.last_solve)}</td>
+                </tr>
+              `).join('')}
+              ${state.scoreboard.length === 0 ? `
+                <tr><td colspan="5" style="text-align: center; color: var(--text-dim);">No hay equipos registrados</td></tr>
+              ` : ''}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function renderAdmin() {
+      return `
+        <main>
+          <div class="admin-container">
+            <div class="page-header">
+              <h1>Panel de Administracion</h1>
+              <div style="display: flex; gap: 0.5rem;">
+                <button class="btn btn-danger" onclick="resetAllData()">Borrar Todo y Reiniciar</button>
+              </div>
+            </div>
+
+            <div class="admin-section">
+              <div class="admin-section-header">
+                <h3>Nuevo Reto</h3>
+              </div>
+              <div class="admin-section-content">
+                <form id="challenge-form" onsubmit="createChallenge(event)">
+                  <div class="challenge-form-grid">
+                    <div class="form-group">
+                      <label>Título</label>
+                      <input type="text" name="title" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Categoría</label>
+                      <select name="category" required>
+                        <option value="Web">Web</option>
+                        <option value="Crypto">Crypto</option>
+                        <option value="Forensics">Forensics</option>
+                        <option value="Pwn">Pwn</option>
+                       </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Puntos</label>
+                      <select name="points" required>
+                        <option value="100">100</option>
+                        <option value="300">300</option>
+                        <option value="500">500</option>
+                        <option value="1000">1000</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Flag</label>
+                      <input type="text" name="flag" placeholder="CTF{...}" required>
+                    </div>
+                    <div class="form-group full-width">
+                      <label>Descripción</label>
+                      <textarea name="description" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                      <label>Pista 1 (opcional)</label>
+                      <input type="text" name="hint1">
+                    </div>
+                    <div class="form-group full-width">
+                      <label>Pista 2 (opcional)</label>
+                      <input type="text" name="hint2">
+                    </div>
+                    <div class="form-group full-width">
+                      <label>Pista 3 (opcional)</label>
+                      <input type="text" name="hint3">
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Crear Reto</button>
+                </form>
+              </div>
+            </div>
+
+            <div class="admin-section">
+              <div class="admin-section-header">
+                <h3>Retos Existentes</h3>
+              </div>
+              <div class="admin-section-content">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Título</th>
+                      <th>Categoría</th>
+                      <th>Puntos</th>
+                      <th>Flag</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-challenges">
+                    ${state.adminChallenges ? state.adminChallenges.map(c => `
+                      <tr>
+                        <td>${c.title}</td>
+                        <td>${c.category}</td>
+                        <td>${c.points}</td>
+                        <td style="font-family: monospace; font-size: 0.85rem;">${c.flag}</td>
+                        <td>
+                          <button class="btn btn-secondary btn-small" onclick="editChallenge('${c.id}')">Editar</button>
+                          <button class="btn btn-danger btn-small" onclick="deleteChallenge('${c.id}')">Eliminar</button>
+                        </td>
+                      </tr>
+                    `).join('') : ''}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="admin-section">
+              <div class="admin-section-header">
+                <h3>Equipos Registrados</h3>
+                <button class="btn btn-danger btn-small" onclick="resetAllData()">Borrar Todos los Equipos</button>
+              </div>
+              <div class="admin-section-content">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Puntos</th>
+                      <th>Retos Resueltos</th>
+                      <th>Registrado</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-teams">
+                    ${state.adminTeams ? state.adminTeams.map(t => `
+                      <tr>
+                        <td>${t.name}</td>
+                        <td>${t.total_points}</td>
+                        <td>${t.challenges_solved}</td>
+                        <td>${formatTime(t.created_at)}</td>
+                        <td>
+                          <button class="btn btn-danger btn-small" onclick="deleteTeam('${t.id}')">Eliminar</button>
+                        </td>
+                      </tr>
+                    `).join('') : ''}
+                    ${state.adminTeams && state.adminTeams.length === 0 ? `
+                      <tr><td colspan="5" style="text-align: center; color: var(--text-dim);">No hay equipos registrados</td></tr>
+                    ` : ''}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </main>
+      `;
+    }
+
+    // Modal
+    function showModal(title, content) {
+      const modal = document.createElement('div');
+      modal.className = 'modal-overlay';
+      modal.innerHTML = `
+        <div class="modal">
+          <div class="modal-header">
+            <h3>${title}</h3>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+          </div>
+          <div class="modal-body">${content}</div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      setTimeout(() => modal.classList.add('active'), 10);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+    }
+
+    function closeModal() {
+      const modal = document.querySelector('.modal-overlay');
+      if (modal) {
+        modal.classList.remove('active');
+        setTimeout(() => modal.remove(), 300);
+      }
+    }
+
+    // Event handlers
+    function switchAuthTab(tab) {
+      const tabs = document.querySelectorAll('.auth-tab');
+      tabs.forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+      document.querySelector('input[name="action"]').value = tab;
+      document.querySelector('.btn-primary').textContent = tab === 'login' ? 'Entrar' : 'Registrarse';
+    }
+
+    async function handleAuth(event) {
+      event.preventDefault();
+      const form = event.target;
+      const data = {
+        name: form.name.value,
+        password: form.password.value
+      };
+      const action = form.action.value;
+      const errorDiv = document.getElementById('auth-error');
+
+      try {
+        const result = await api.post(`/api/${action}`, data);
+        if (result.error) {
+          errorDiv.textContent = result.error;
+        } else {
+          state.user = result.teamName;
+          await loadChallenges();
+          render();
+        }
+      } catch (err) {
+        errorDiv.textContent = err?.message || 'Error de conexión';
+      }
+    }
+
+    function showAdminLogin() {
+      showModal('Admin Login', `
+        <form onsubmit="handleAdminLogin(event)">
+          <div class="form-group">
+            <label>Usuario</label>
+            <input type="text" name="username" required>
+          </div>
+          <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" name="password" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Entrar</button>
+          <div id="admin-error" class="error-msg"></div>
+        </form>
+      `);
+    }
+
+    async function handleAdminLogin(event) {
+      event.preventDefault();
+      const form = event.target;
+      const result = await api.post('/api/admin/login', {
+        username: form.username.value,
+        password: form.password.value
+      });
+
+      if (result.error) {
+        document.getElementById('admin-error').textContent = result.error;
+      } else {
+        state.user = 'Admin';
+        state.isAdmin = true;
+        closeModal();
+        await loadAdminData();
+        navigate('admin');
+      }
+    }
+
+    async function logout() {
+      await api.post('/api/logout');
+      state.user = null;
+      state.isAdmin = false;
+      render();
+    }
+
+    function navigate(page) {
+      state.currentPage = page;
+      if (page === 'scoreboard') loadScoreboard();
+      if (page === 'admin') loadAdminData();
+      if (page === 'challenges') loadChallenges();
+      render();
+      return false;
+    }
+
+    function filterCategory(category) {
+      state.selectedCategory = category;
+      render();
+    }
+
+    async function loadChallenges() {
+      state.challenges = await api.get('/api/challenges');
+    }
+
+    async function loadScoreboard() {
+      state.scoreboard = await api.get('/api/scoreboard');
+      if (state.currentPage === 'scoreboard') render();
+    }
+
+    async function loadAdminData() {
+      state.adminChallenges = await api.get('/api/admin/challenges');
+      state.adminTeams = await api.get('/api/admin/teams');
+    }
+
+    async function submitFlag(challengeId) {
+      const input = document.getElementById(`flag-${challengeId}`);
+      const flag = input.value.trim();
+
+      if (!flag) {
+        showToast('Introduce una flag', 'error');
+        return;
+      }
+
+      const result = await api.post('/api/submit', { challengeId, flag });
+
+      if (result.correct) {
+        showToast(`¡Correcto! +${result.pointsAwarded} puntos`);
+        await loadChallenges();
+        render();
+      } else {
+        showToast(result.message || result.error, 'error');
+      }
+    }
+
+    async function unlockHint(challengeId, hintNumber) {
+      const challenge = state.challenges.find(c => c.id === challengeId);
+      const newPoints = calculatePoints(challenge.points, hintNumber);
+      
+      if (!confirm(`¿Desbloquear pista ${hintNumber}? Los puntos máximos serán ${newPoints}`)) {
+        return;
+      }
+
+      const result = await api.post('/api/hint', { challengeId, hintNumber });
+
+      if (result.error) {
+        showToast(result.error, 'error');
+      } else {
+        showToast(`Pista desbloqueada. Puntos máximos: ${result.newMaxPoints}`);
+        await loadChallenges();
+        render();
+      }
+    }
+
+    async function showTeamHistory(teamId, teamName) {
+      const submissions = await api.get(`/api/submissions/${teamId}`);
+      
+      const content = submissions.length === 0 
+        ? '<p style="color: var(--text-dim);">Sin flags resueltas</p>'
+        : submissions.map(s => `
+            <div class="history-item">
+              <div>
+                <div class="history-challenge">${s.challenge_title}</div>
+                <div class="history-time">${formatTime(s.submitted_at)}</div>
+              </div>
+              <div class="history-points">+${s.points_awarded}</div>
+            </div>
+          `).join('');
+
+      showModal(`Historial: ${teamName}`, content);
+    }
+
+    async function createChallenge(event) {
+      event.preventDefault();
+      const form = event.target;
+      const data = {
+        title: form.title.value,
+        description: form.description.value,
+        category: form.category.value,
+        points: parseInt(form.points.value),
+        flag: form.flag.value,
+        hint1: form.hint1.value || null,
+        hint2: form.hint2.value || null,
+        hint3: form.hint3.value || null
+      };
+
+      const result = await api.post('/api/admin/challenges', data);
+      if (result.success) {
+        showToast('Reto creado');
+        form.reset();
+        await loadAdminData();
+        render();
+      } else {
+        showToast(result.error, 'error');
+      }
+    }
+
+    async function deleteChallenge(id) {
+      if (!confirm('¿Eliminar este reto?')) return;
+      await api.delete(`/api/admin/challenges/${id}`);
+      showToast('Reto eliminado');
+      await loadAdminData();
+      render();
+    }
+
+    async function deleteTeam(id) {
+      if (!confirm('¿Eliminar este equipo?')) return;
+      await api.delete(`/api/admin/teams/${id}`);
+      showToast('Equipo eliminado');
+      await loadAdminData();
+      render();
+    }
+
+    async function resetAllData() {
+      if (!confirm('ATENCION: Se borraran TODOS los equipos, puntuaciones y progreso. Los retos se mantendran. ¿Continuar?')) return;
+      if (!confirm('Esta accion NO se puede deshacer. ¿Estas completamente seguro?')) return;
+      
+      await api.post('/api/admin/reset');
+      showToast('Competicion reiniciada - Todos los datos borrados');
+      await loadAdminData();
+      render();
+    }
+
+    function setupEventListeners() {
+      // Enter key for flag submission
+      document.querySelectorAll('.challenge-footer input').forEach(input => {
+        input.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            const challengeId = input.id.replace('flag-', '');
+            submitFlag(challengeId);
+          }
+        });
+      });
+    }
+
+    // Init
+    async function init() {
+	  try {
+	    const me = await api.get('/api/me');
+	    if (me.authenticated) {
+	      state.user = me.teamName;
+	      state.isAdmin = me.isAdmin;
+	      await loadChallenges();
+	    }
+	  } catch (err) {
+	    console.error('Error initializing:', err);
+	  }
+	render();
+
+	setInterval(() => {
+	  if (state.currentPage === 'scoreboard') {
+	    loadScoreboard();
+	  }
+	}, 30000);
+    }
+
+    init();
+  </script>
+</body>
+</html>

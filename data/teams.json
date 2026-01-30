@@ -1,0 +1,44 @@
+[
+  {
+    "id": "6e957959-ab83-4ad5-a1a1-47964f0405a3",
+    "name": "maria",
+    "password": "$2a$10$82rNXqBvH/IHgQWScuCh0uBRQ6WdRB/bCa.WF5Ry96rtjJVbR6Sh2",
+    "created_at": "2026-01-30T09:01:56.288Z"
+  },
+  {
+    "id": "ee643941-0949-474b-893d-661fe2f37857",
+    "name": "mari",
+    "password": "$2a$10$2.KejxNPIXR9k2h7pnuAxObxMvCdEBbk1vJPPmkg4.Txf4yqAupiy",
+    "created_at": "2026-01-30T10:42:56.104Z"
+  },
+  {
+    "id": "40eb6e6b-b1cc-4aaf-9936-6f9a6baf3b3d",
+    "name": "oleole",
+    "password": "$2a$10$HtyDcZfVUiSTP7RB7DrR6OeuBlRuXhISWFYy2Z5nyQlN1QJJYdkYe",
+    "created_at": "2026-01-30T10:43:07.480Z"
+  },
+  {
+    "id": "6c34f087-0338-4429-9018-b9ae7359cf9a",
+    "name": "adminadmin",
+    "password": "$2a$10$x3O7aBjp9TVmZPneQey7vuvMgG3lwz6aGr0TOkXNLQxQaW/y/WsAG",
+    "created_at": "2026-01-30T10:43:22.293Z"
+  },
+  {
+    "id": "fef9253b-fcc8-400f-9a80-cb5565dbd908",
+    "name": "jesus",
+    "password": "$2a$10$8vTapBK4QVOKhdbTUpnFleK7DO1lEFyv4/pOIyNu3onU0IjuIV5qK",
+    "created_at": "2026-01-30T10:51:49.693Z"
+  },
+  {
+    "id": "33223289-077b-4281-91c7-abf5abc23829",
+    "name": "meryloli",
+    "password": "$2a$10$k3VP/fsJUI4C9BFZE7ZoRenrbDl1XIA9NENGtTPk74CooaLAliYQ.",
+    "created_at": "2026-01-30T10:52:32.152Z"
+  },
+  {
+    "id": "84c9a9cd-a854-4da2-9df9-0601a7f79888",
+    "name": "hola",
+    "password": "$2a$10$JOCq9wt83FWnm7dk0tm90u0tp5bitcvxZeXEEwxjjiEo/lGx8UNNW",
+    "created_at": "2026-01-30T12:03:15.116Z"
+  }
+]
