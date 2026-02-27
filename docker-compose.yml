@@ -1,0 +1,11 @@
+services:
+  ctf-platform:
+    build: .
+    ports:
+      - "3060:3000"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - PORT=3000
+      - FLAG_SALT=ctf-platform-secret-salt-2024
+    restart: unless-stopped
