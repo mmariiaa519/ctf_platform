@@ -1,11 +1,14 @@
+version: '3.8'
 services:
   ctf-platform:
     build: .
+    container_name: marsec-ctf
     ports:
       - "3060:3000"
     volumes:
       - ./data:/app/data
-    environment:
-      - PORT=3000
-      - FLAG_SALT=ctf-platform-secret-salt-2024
     restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - SESSION_SECRET=marsec-prod-session-2026-change-me
+      - FLAG_SALT=marsec-cyber-range-2026-salt
