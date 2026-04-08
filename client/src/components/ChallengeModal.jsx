@@ -259,7 +259,7 @@ export default function ChallengeModal({ challenge: c, onClose, onSolve }) {
                 ref={inputRef}
                 value={flag}
                 onChange={e => setFlag(e.target.value)}
-                placeholder={c.placeholder || 'Introduce el dato encontrado'}
+                placeholder="Introduce el dato encontrado"
                 style={{ fontFamily: 'var(--font-mono)', letterSpacing: '0.03em', fontSize: '0.95rem' }}
               />
             </div>

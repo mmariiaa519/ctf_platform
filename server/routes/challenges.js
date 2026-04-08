@@ -144,7 +144,6 @@ router.get('/', (req, res) => {
     category: c.category,
     points: c.points,
     order_num: c.order_num,
-    placeholder: c.placeholder || null,
     solved: !!solvedMap[c.id],
     hintUnlocked: !!hintMap[c.id],
     hint: hintMap[c.id] ? c.hint1 : null,                  // Only reveal hint text if unlocked

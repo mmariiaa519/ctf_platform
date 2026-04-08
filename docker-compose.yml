@@ -15,7 +15,6 @@
 # (ver .env.example para la plantilla).
 # ══════════════════════════════════════════════════════════════
 
-version: '3.8'
 services:
   ctf-platform:
     build: .                        # Usa el Dockerfile de la raiz del proyecto
