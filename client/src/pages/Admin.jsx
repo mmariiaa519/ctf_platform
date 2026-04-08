@@ -511,7 +511,7 @@ function ChallengeForm({ form, setForm, onSave, onCancel, isNew }) {
           <input
             value={form.flag}
             onChange={e => up('flag', e.target.value)}
-            placeholder={isNew ? 'F14G{...} o FLAG{...}' : 'Sin cambios'}
+            placeholder={isNew ? 'Dato de inteligencia exacto' : 'Sin cambios'}
             style={{ fontFamily: 'var(--font-mono)' }}
           />
         </div>

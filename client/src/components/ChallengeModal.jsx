@@ -250,16 +250,16 @@ export default function ChallengeModal({ challenge: c, onClose, onSolve }) {
           <form onSubmit={submitFlag} className={shaking ? 'shake' : ''}>
             <div style={{ marginBottom: '0.85rem' }}>
               {/* Label for the flag input */}
-              <label>Flag</label>
+              <label>Dato de inteligencia</label>
               {/* Text input for flag entry.
-                  - Monospace font (JetBrains Mono) for flag readability.
-                  - Placeholder shows accepted formats: F14G{...} o FLAG{...}
+                  - Monospace font (JetBrains Mono) for readability.
+                  - Placeholder from challenge data hints at expected format.
                   - Ref used for programmatic focus on mount and after wrong attempts. */}
               <input
                 ref={inputRef}
                 value={flag}
                 onChange={e => setFlag(e.target.value)}
-                placeholder="F14G{...} o FLAG{...}"
+                placeholder={c.placeholder || 'Introduce el dato encontrado'}
                 style={{ fontFamily: 'var(--font-mono)', letterSpacing: '0.03em', fontSize: '0.95rem' }}
               />
             </div>
@@ -270,7 +270,7 @@ export default function ChallengeModal({ challenge: c, onClose, onSolve }) {
               style={{ width: '100%', padding: '0.65rem' }}
               disabled={loading || !flag.trim()}
             >
-              {loading ? <span className="spinner" style={{ width: 14, height: 14 }} /> : 'Enviar flag'}
+              {loading ? <span className="spinner" style={{ width: 14, height: 14 }} /> : 'Enviar'}
             </button>
           </form>
         ) : (
