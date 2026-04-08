@@ -1,4 +1,8 @@
 node_modules
-data_backup
 .git
+.env
 *.md
+*.png
+capturas/
+.claude/
+data_backup/

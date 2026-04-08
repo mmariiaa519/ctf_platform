@@ -1,16 +1,12 @@
 {
   "name": "marsec-ctf-platform",
   "version": "2.0.0",
-  "description": "MARSEC Cyber Range — CTF Platform",
-  "main": "server.js",
+  "description": "MARSEC Cyber Range — CTF Platform (TRUST Lab, UPCT)",
+  "private": true,
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
-  },
-  "dependencies": {
-    "express": "^4.18.2",
-    "bcryptjs": "^2.4.3",
-    "express-session": "^1.17.3",
-    "uuid": "^9.0.0"
+    "start": "node server/server.js",
+    "dev:server": "node server/server.js",
+    "dev:client": "node start-client.mjs",
+    "migrate": "node migrate-flags.js"
   }
 }

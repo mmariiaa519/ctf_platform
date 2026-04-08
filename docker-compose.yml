@@ -1,14 +1,29 @@
+# ══════════════════════════════════════════════════════════════
+# docker-compose.yml — Orquestacion del contenedor MARSEC CTF
+#
+# Uso:
+#   docker compose up -d --build    (construir y arrancar)
+#   docker compose logs -f          (ver logs en tiempo real)
+#   docker compose down             (detener y eliminar)
+#
+# Los datos persistentes (equipos, retos, submissions) se almacenan
+# en ./data/ del host, montado como volumen en /app/data/.
+# Esto permite hacer backup, resetear datos, o editar challenges.json
+# directamente en el host sin reconstruir la imagen.
+#
+# Las credenciales y configuracion sensible se cargan desde .env
+# (ver .env.example para la plantilla).
+# ══════════════════════════════════════════════════════════════
+
 version: '3.8'
 services:
   ctf-platform:
-    build: .
-    container_name: marsec-ctf
+    build: .                        # Usa el Dockerfile de la raiz del proyecto
+    container_name: marsec-ctf      # Nombre fijo para facilitar docker logs/exec
     ports:
-      - "3060:3000"
+      - "3060:3000"                 # Host:3060 → Contenedor:3000 (Express)
     volumes:
-      - ./data:/app/data
-    restart: unless-stopped
-    environment:
-      - NODE_ENV=production
-      - SESSION_SECRET=marsec-prod-session-2026-change-me
-      - FLAG_SALT=marsec-cyber-range-2026-salt
+      - ./data:/app/data            # Persistencia de datos JSON fuera del contenedor
+    env_file:
+      - .env                        # Carga SESSION_SECRET, FLAG_SALT, ADMIN_PASS, etc.
+    restart: unless-stopped         # Auto-reinicio tras crashes (no tras stop manual)

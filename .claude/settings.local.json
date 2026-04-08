@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const bcrypt = require\\(''bcryptjs''\\); console.log\\(bcrypt.hashSync\\(''MARSEC_admin_2026'', 10\\)\\);\")",
+      "Bash(pandoc 'C:\\\\Users\\\\ccalz\\\\Downloads\\\\MARSEC\\\\MARSEC\\\\Informe retos MAERCS.docx' -t plain)"
+    ]
+  }
+}

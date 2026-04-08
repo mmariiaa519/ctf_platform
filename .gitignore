@@ -1,3 +1,7 @@
 node_modules/
-data_backup/
 .env
+*.bak
+*.tmp
+data_backup/
+client/dist/
+server/dist/
