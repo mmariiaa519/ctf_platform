@@ -225,10 +225,17 @@ export default function ChallengeModal({ challenge: c, onClose, onSolve }) {
           </button>
         </div>
 
-        {/* --- Description section --- */}
-        <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.75, marginBottom: '1.5rem' }}>
-          {c.description}
-        </p>
+        {/* --- Description section (bilingual: ES + EN) --- */}
+        <div style={{ marginBottom: '1.5rem' }}>
+          <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.75 }}>
+            {c.description}
+          </p>
+          {c.description_en && (
+            <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.7, marginTop: '0.5rem', fontStyle: 'italic' }}>
+              {c.description_en}
+            </p>
+          )}
+        </div>
 
         {/* --- Feedback banner ---
             Conditionally rendered after a flag submission attempt.

@@ -141,6 +141,7 @@ router.get('/', (req, res) => {
     id: c.id,
     title: c.title,
     description: c.description,
+    description_en: c.description_en || null,
     category: c.category,
     points: c.points,
     order_num: c.order_num,

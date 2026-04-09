@@ -156,13 +156,17 @@ export default function ChallengeList({ challenges, onSelect }) {
                   {idx + 1}
                 </td>
 
-                {/* Column 2: Challenge title + truncated description */}
+                {/* Column 2: Challenge title + bilingual description (ES + EN) */}
                 <td>
                   <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{c.title}</span>
-                  {/* Description line: single-line with ellipsis overflow at 480px max-width */}
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.1rem', lineHeight: 1.4, maxWidth: 480, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {c.description}
                   </div>
+                  {c.description_en && (
+                    <div style={{ fontSize: '0.73rem', color: 'var(--text-muted)', marginTop: '0.1rem', lineHeight: 1.4, maxWidth: 480, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontStyle: 'italic', opacity: 0.7 }}>
+                      {c.description_en}
+                    </div>
+                  )}
                 </td>
 
                 {/* Column 3: Category badge with color-coded background.
